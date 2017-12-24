@@ -73,7 +73,7 @@ class DateTimeTest {
     @Test
     void isLeapYear(){
         try {
-            assertEquals(true, DateTime.isLeapYear(2020));
+            assertEquals(true, DateTime.isLeapYear(1940));
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
