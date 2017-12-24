@@ -34,7 +34,7 @@ public class DateTime {
      * of the required range.
      */
     public DateTime(int year, int month, int day, int hour, int minute, int second) throws Exception {
-        if (validDateTime(month, day, year, hour, minute, second)) {
+        if (validDateTime(year, month, day, hour, minute, second)) {
             this.year = year;
             this.month = month;
             this.day = day;
@@ -81,16 +81,30 @@ public class DateTime {
         }
     }
 
-    private boolean validDate(int year, int month, int day){
-        if(year > 9999) {
+    private boolean validDate(int month, int day, int year)
+    {
+        if (day < 1 || month < 1 || month >12 || year < 1900 || year > 9999)
             return false;
+
+        if(isThirtyOneDayMonth(month) || isDecember(month)){
+            if(day>31) return false;
         }
-        else if(month > 12){
-            return false;
+
+        if(isThirtyDayMonth(month)){
+            if(day>30) return false;
         }
-        else if(day > 31){
-            return false;
+
+        if(isFebruary(month)){
+            if(isLeapYear(year))
+            {
+                if(day > 29) return false;
+
+            } else  {
+                if(day >28) return false;
+            }
+
         }
+
         return true;
     }
 
