@@ -18,7 +18,7 @@ class DateTimeTest {
     void toStringDateTest(){
         try {
             DateTime date = new DateTime(2012, 12, 21);
-            assertEquals("12/21/2012", date.toString());
+            assertEquals("12/21/2012 00:00:00", date.toString());
         } catch (Exception e){
             System.out.println(e.getMessage());
         }

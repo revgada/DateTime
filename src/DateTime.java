@@ -1,7 +1,7 @@
 public class DateTime {
-    private int second;
-    private int minute;
-    private int hour;
+    private String second;
+    private String minute;
+    private String hour;
     private int day;
     private int month;
     private int year;
@@ -14,10 +14,13 @@ public class DateTime {
      * of the required range.
      */
     public DateTime(int year, int month, int day) throws Exception {
-        if (validDate(month, day, year)) {
+        if (validDate(year, month, day)) {
             this.year = year;
             this.month = month;
             this.day = day;
+            this.hour = "00";
+            this.minute = "00";
+            this.second = "00";
         } else {
             throw new Exception("Invalid Date");
         }
@@ -35,61 +38,82 @@ public class DateTime {
             this.year = year;
             this.month = month;
             this.day = day;
-            this.hour = hour;
-            this.minute = minute;
-            this.second = second;
+            this.hour = formatHour(hour);
+            this.minute = formatMinute(minute);
+            this.second = formatSecond(second);
         } else {
             throw new Exception("Invalid DateTime");
         }
     }
 
-
-    public int getSecond() {
-        return second;
+    public String toString() {
+        return month + "/" + day + "/" + year + " " + hour + ":" + minute + ":" + second;
     }
 
-    public void setSecond(int second) {
-        this.second = second;
+    private String formatHour(int hour){
+        this.hour = String.valueOf(hour);
+
+        if(this.hour.length() < 2){
+            return "0" + this.hour;
+        }
+        else{
+            return this.hour;
+        }
     }
 
-    public int getMinute() {
-        return minute;
+    private String formatMinute(int minute){
+        this.minute = String.valueOf(minute);
+        if(this.minute.length() < 2){
+            return "0" + this.minute;
+        }
+        else{
+            return this.minute;
+        }
     }
 
-    public void setMinute(int minute) {
-        this.minute = minute;
+    private String formatSecond(int second){
+        this.second = String.valueOf(second);
+        if(this.second.length() < 2){
+            return "0" + this.second;
+        }
+        else{
+            return this.second;
+        }
     }
 
-    public int getHour() {
-        return hour;
+    private boolean validDate(int year, int month, int day){
+        if(year > 9999) {
+            return false;
+        }
+        else if(month > 12){
+            return false;
+        }
+        else if(day > 31){
+            return false;
+        }
+        return true;
     }
 
-    public void setHour(int hour) {
-        this.hour = hour;
-    }
-
-    public int getDay() {
-        return day;
-    }
-
-    public void setDay(int day) {
-        this.day = day;
-    }
-
-    public int getMonth() {
-        return month;
-    }
-
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
+    private boolean validDateTime(int year, int month, int day, int hour, int minute, int second){
+        if(year > 9999) {
+            return false;
+        }
+        else if(month > 12){
+            return false;
+        }
+        else if(day > 31){
+            return false;
+        }
+        else if(hour > 24) {
+            return false;
+        }
+        else if(minute > 60) {
+            return false;
+        }
+        else if(second > 60) {
+            return false;
+        }
+        return true;
     }
 
 }
