@@ -229,6 +229,54 @@ public class DateTime {
         return true;
     }
 
+    public String getSecond() {
+        return second;
+    }
+
+    public void setSecond(String second) {
+        this.second = second;
+    }
+
+    public String getMinute() {
+        return minute;
+    }
+
+    public void setMinute(String minute) {
+        this.minute = minute;
+    }
+
+    public String getHour() {
+        return hour;
+    }
+
+    public void setHour(String hour) {
+        this.hour = hour;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
     private boolean validDateTime(int year, int month, int day, int hour, int minute, int second) {
         if (year > 9999) {
             return false;
@@ -238,6 +286,7 @@ public class DateTime {
             return false;
         } else if (hour > 24) {
             return false;
+
         } else if (minute > 60) {
             return false;
         } else if (second > 60) {
