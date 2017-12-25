@@ -14,8 +14,8 @@ public class DateTime {
      * @param month
      * @param day
      * @throws Exception in case some or all of the parameters fall out
-     *                   of the required range.
-     *                   Description: Requires only the date portion, time is set to 00:00:00
+     * of the required range.
+     * Description: Requires only the date portion, time is set to 00:00:00
      */
     public DateTime(int year, int month, int day) throws Exception {
         if (validDate(year, month, day)) {
@@ -41,9 +41,9 @@ public class DateTime {
      * @param minute Transformed into string through formatMinute method
      * @param second Transformed into string through formatSecond method
      * @throws Exception in case some or all of the parameters fall out
-     *                   of the required range.
-     *                   Description: Requires both the date and the time portion. Time is
-     *                   converted into string through formatXXXX methods
+     * of the required range.
+     * Description: Requires both the date and the time portion. Time is
+     * converted into string through formatXXXX methods
      */
     public DateTime(int year, int month, int day, int hour, int minute, int second) throws Exception {
         if (validDateTime(year, month, day, hour, minute, second)) {
@@ -229,6 +229,43 @@ public class DateTime {
         return true;
     }
 
+
+    /**
+     * Method: validDateTime
+     *
+     * @param year
+     * @param month
+     * @param day
+     * @param hour
+     * @param minute
+     * @param second
+     * @return boolean
+     * Description: Returns true if the parameters supplied
+     * are valid values for year, month, date, hour, minute and second
+     * attributes.
+     */
+    private boolean validDateTime(int year, int month, int day, int hour, int minute, int second) {
+        if(validDate(year,month,day)){
+            if (hour < 0 || hour > 24)
+                return false;
+            else if (minute < 0 || minute > 60) {
+                return false;
+            }
+            else if (second < 0 || second > 60) {
+                return false;
+            }
+        }else {
+            return false;
+        }
+
+        return true;
+    }
+
+
+    /**
+     * Getters and setters
+     *
+     */
 
     public String getSecond() {
         return second;

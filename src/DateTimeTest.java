@@ -6,13 +6,60 @@ import static org.junit.jupiter.api.Assertions.*;
 class DateTimeTest {
 
     @Test
-    void DateTimeTest() {
+    void DateWrongYearTest() {
         try {
-            DateTime date = new DateTime(2012, 12, 21);
+            DateTime date = new DateTime(100000, 12, 21);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            assertEquals("Invalid Date", e.getMessage());
         }
     }
+
+    @Test
+    void DateWrongMonthTest() {
+        try {
+            DateTime date = new DateTime(2012, 17, 21);
+        } catch (Exception e) {
+            assertEquals("Invalid Date", e.getMessage());
+        }
+    }
+
+    @Test
+    void DateWrongDayTest() {
+        try {
+            DateTime date = new DateTime(100000, 12, 7777);
+        } catch (Exception e) {
+            assertEquals("Invalid Date", e.getMessage());
+        }
+    }
+
+    @Test
+    void DateTimeWrongHourTest(){
+        try{
+            DateTime dateTime = new DateTime(2012, 12, 21, 66, 21, 32);
+        }catch (Exception e){
+            assertEquals("Invalid DateTime", e.getMessage());
+        }
+    }
+
+    @Test
+    void DateTimeWrongMinuteTest(){
+        try{
+            DateTime dateTime = new DateTime(2012, 12, 21, 14, 100000, 32);
+        }catch (Exception e){
+            assertEquals("Invalid DateTime", e.getMessage());
+        }
+    }
+
+    @Test
+    void DateTimeWrongSecondTest(){
+        try{
+            DateTime dateTime = new DateTime(2012, 12, 21, 14, 21, 10000);
+        }catch (Exception e){
+            assertEquals("Invalid DateTime", e.getMessage());
+        }
+    }
+
+
 
     @Test
     void toStringDateTest(){
@@ -25,20 +72,10 @@ class DateTimeTest {
     }
 
     @Test
-    void validDate31dayMonthTest(){
+    void toStringDateTimeTest(){
         try {
-            DateTime date = new DateTime(2012, 1, 32);
-            assertEquals("Invalid Date", date.toString());
-        } catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-    }
-
-    @Test
-    void validDateTime30dayMonthInvalidDateTest(){
-        try {
-            DateTime dateTime = new DateTime(2012, 4, 31, 13, 12, 32);
-            assertEquals("Invalid DateTIme", dateTime.toString());
+            DateTime dateTime = new DateTime(2012,12,21,12,45,13);
+            assertEquals("12/21/2012 12:45:13", dateTime.toString());
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
