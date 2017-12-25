@@ -392,6 +392,26 @@ public class DateTime {
     }
 
     /**
+     * Method: addYears
+     *
+     * @param numberOfYears A number of years to add
+     * @return String
+     * Description: Add the desired number of years to the
+     * instance variable years.
+     */
+    public String addYears(int numberOfYears){
+        if(numberOfYears > 0 && (year + numberOfYears) < 9999 ) {
+            int incrementedYear = year + numberOfYears;
+            this.year = incrementedYear;
+        } else {
+            System.out.println("Number of years can't be negative");
+            return null;
+        }
+        return this.toString();
+    }
+
+
+    /**
      * Getters and setters
      *
      */
