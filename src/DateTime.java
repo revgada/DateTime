@@ -2,9 +2,9 @@ public class DateTime {
     private String second;
     private String minute;
     private String hour;
-    private int day;
-    private int month;
-    private int year;
+    private String day;
+    private String month;
+    private String year;
 
 
     /**
@@ -204,7 +204,7 @@ public class DateTime {
      * Description: Returns true if the parameters supplied
      * are valid values for year, month and date attributes.
      */
-    private boolean validDate(int year, int month, int day) {
+    private static boolean validDate(int year, int month, int day) {
         if (day < 1 || month < 1 || month > 12 || year < 0 || year > 9999)
             return false;
 
@@ -244,7 +244,7 @@ public class DateTime {
      * are valid values for year, month, date, hour, minute and second
      * attributes.
      */
-    private boolean validDateTime(int year, int month, int day, int hour, int minute, int second) {
+    private static boolean validDateTime(int year, int month, int day, int hour, int minute, int second) {
         if(validDate(year,month,day)){
             if (hour < 0 || hour > 24)
                 return false;
@@ -259,6 +259,14 @@ public class DateTime {
         }
 
         return true;
+    }
+
+    public String addDays(int numberOfDays){
+        int incrementedDays = this.day + numberOfDays;
+        if (DateTime.validDate(this.year,this.month,incrementedDays)){
+            this.day = incrementedDays;
+        }
+        return this.toString();
     }
 
 

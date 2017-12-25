@@ -82,6 +82,50 @@ class DateTimeTest {
     }
 
     @Test
+    void addDaysDecember31Test(){
+        try {
+            DateTime dateTime = new DateTime(2012,12,22,12,45,13);
+            assertEquals("01/01/2012 12:45:13", dateTime.addDays(10));
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    void addDays30DayMonthTest(){
+        try {
+            DateTime dateTime = new DateTime(2012,4,21,12,45,13);
+            assertEquals("05/01/2012 12:45:13", dateTime.addDays(10));
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    void addDaysFebruaryNoLeapYearTest(){
+        try {
+            DateTime dateTime = new DateTime(2011,2,28,12,45,13);
+            assertEquals("03/01/2011 12:45:13", dateTime.addDays(1));
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    void addDaysFebruaryLeapYearTest(){
+        try {
+            DateTime dateTime = new DateTime(2011,2,28,12,45,13);
+            assertEquals("02/29/2011 12:45:13", dateTime.addDays(1));
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /** =============================================================================================
+     * Helper Tests
+     *  =============================================================================================
+     */
+    @Test
     void isThirtyOneDayMonthTest(){
         try {
             assertEquals(true, DateTime.isThirtyOneDayMonth(1));
