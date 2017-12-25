@@ -1,10 +1,10 @@
 public class DateTime {
-    private String second;
-    private String minute;
-    private String hour;
-    private String day;
-    private String month;
-    private String year;
+    private int second;
+    private int minute;
+    private int hour;
+    private int day;
+    private int month;
+    private int year;
 
 
     /**
@@ -22,9 +22,9 @@ public class DateTime {
             this.year = year;
             this.month = month;
             this.day = day;
-            this.hour = "00";
-            this.minute = "00";
-            this.second = "00";
+            this.hour = 0;
+            this.minute = 0;
+            this.second = 0;
         } else {
             throw new Exception("Invalid Date");
         }
@@ -50,9 +50,9 @@ public class DateTime {
             this.year = year;
             this.month = month;
             this.day = day;
-            this.hour = formatHour(hour);
-            this.minute = formatMinute(minute);
-            this.second = formatSecond(second);
+            this.hour = hour;
+            this.minute = minute;
+            this.second = second;
         } else {
             throw new Exception("Invalid DateTime");
         }
@@ -67,7 +67,7 @@ public class DateTime {
      * of the months that has 31 days.
      */
     public static boolean isThirtyOneDayMonth(int month) {
-        return month == 1 || month == 3 || month == 5 || month == 8 || month == 10;
+        return month == 1 || month == 3 || month == 5 || month == 8 || month == 10 || month == 12;
     }
 
     /**
@@ -139,7 +139,49 @@ public class DateTime {
      */
     @Override
     public String toString() {
-        return month + "/" + day + "/" + year + " " + hour + ":" + minute + ":" + second;
+        String monthString = formatMonth(month);
+        String dayString = formatDay(day);
+        String hourString = formatHour(hour);
+        String minuteString = formatMinute(minute);
+        String secondString = formatSecond(second);
+        return monthString + "/" + dayString + "/" + year + " " + hourString + ":" + minuteString + ":" + secondString;
+    }
+
+    /**
+     * Method: formatMonth
+     *
+     * @param month An int representation of the month attribute
+     * @return String
+     * Description: Returns the formatted form of the hour attribute.
+     * If it has less than two digits, adds a 0 in front.
+     */
+    private String formatMonth(int month) {
+        String monthString = String.valueOf(month);
+
+        if (monthString.length() < 2) {
+            return "0" + this.month;
+        } else {
+            return monthString;
+        }
+    }
+
+    /**
+     * Method: formatDay
+     *
+     * @param day An int representation of the month attribute
+     * @return String
+     * Description: Returns the formatted form of the hour attribute.
+     * If it has less than two digits, adds a 0 in front.
+     */
+    private String formatDay(int day) {
+        String dayString = String.valueOf(day);
+
+
+        if (dayString.length() < 2) {
+            return "0" + this.day;
+        } else {
+            return dayString;
+        }
     }
 
     /**
@@ -151,12 +193,12 @@ public class DateTime {
      * If it has less than two digits, adds a 0 in front.
      */
     private String formatHour(int hour) {
-        this.hour = String.valueOf(hour);
+        String hourString = String.valueOf(hour);
 
-        if (this.hour.length() < 2) {
+        if (hourString.length() < 2) {
             return "0" + this.hour;
         } else {
-            return this.hour;
+            return hourString;
         }
     }
 
@@ -169,11 +211,12 @@ public class DateTime {
      * If it has less than two digits, adds a 0 in front.
      */
     private String formatMinute(int minute) {
-        this.minute = String.valueOf(minute);
-        if (this.minute.length() < 2) {
+        String minuteString = String.valueOf(minute);
+
+        if (minuteString.length() < 2) {
             return "0" + this.minute;
         } else {
-            return this.minute;
+            return minuteString;
         }
     }
 
@@ -186,11 +229,12 @@ public class DateTime {
      * If it has less than two digits, adds a 0 in front.
      */
     private String formatSecond(int second) {
-        this.second = String.valueOf(second);
-        if (this.second.length() < 2) {
+        String secondString = String.valueOf(second);
+
+        if (secondString.length() < 2) {
             return "0" + this.second;
         } else {
-            return this.second;
+            return secondString;
         }
     }
 
@@ -262,10 +306,29 @@ public class DateTime {
     }
 
     public String addDays(int numberOfDays){
-        int incrementedDays = this.day + numberOfDays;
-        if (DateTime.validDate(this.year,this.month,incrementedDays)){
-            this.day = incrementedDays;
+        int incrementedDay = this.day + numberOfDays;
+
+        if (isThirtyDayMonth(month)){
+            if (incrementedDay > 30){
+                while(incrementedDay > 30){
+                    incrementedDay -= 30;
+                    month++;
+                    //addMonths(1);
+                }
+            }
         }
+
+        if (isThirtyOneDayMonth(month)) {
+            if (incrementedDay > 31){
+                while(incrementedDay > 31){
+                    incrementedDay -= 31;
+                    month++;
+                    //addMonths(1);
+                }
+            }
+        }
+
+        this.day = incrementedDay;
         return this.toString();
     }
 
@@ -275,27 +338,27 @@ public class DateTime {
      *
      */
 
-    public String getSecond() {
+    public int getSecond() {
         return second;
     }
 
-    public void setSecond(String second) {
+    public void setSecond(int second) {
         this.second = second;
     }
 
-    public String getMinute() {
+    public int getMinute() {
         return minute;
     }
 
-    public void setMinute(String minute) {
+    public void setMinute(int minute) {
         this.minute = minute;
     }
 
-    public String getHour() {
+    public int getHour() {
         return hour;
     }
 
-    public void setHour(String hour) {
+    public void setHour(int hour) {
         this.hour = hour;
     }
 
@@ -322,6 +385,4 @@ public class DateTime {
     public void setYear(int year) {
         this.year = year;
     }
-
-
 }
