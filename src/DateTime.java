@@ -1,3 +1,5 @@
+import javax.swing.plaf.synth.SynthEditorPaneUI;
+
 public class DateTime {
     private int second;
     private int minute;
@@ -314,27 +316,70 @@ public class DateTime {
      * instance variable day.
      */
     public String addDays(int numberOfDays){
-        int incrementedDay = this.day + numberOfDays;
+        if(numberOfDays > 0) {
+            int incrementedDay = this.day + numberOfDays;
 
-        if (isThirtyDayMonth(month)){
-            if (incrementedDay > 30){
-                while(incrementedDay > 30){
-                    incrementedDay -= 30;
-                    addMonths(1);
+            if (isThirtyDayMonth(month)) {
+                if (incrementedDay > 30) {
+                    while (incrementedDay > 30) {
+                        incrementedDay -= 30;
+                        addMonths(1);
+                    }
                 }
             }
-        }
 
-        if (isThirtyOneDayMonth(month)) {
-            if (incrementedDay > 31){
-                while(incrementedDay > 31){
-                    incrementedDay -= 31;
-                    addMonths(1);
+            if (isThirtyOneDayMonth(month)) {
+                if (incrementedDay > 31) {
+                    while (incrementedDay > 31) {
+                        incrementedDay -= 31;
+                        addMonths(1);
+                    }
                 }
             }
-        }
 
-        this.day = incrementedDay;
+            if (isFebruary(month)) {
+                if (isLeapYear(year)) {
+                    if (incrementedDay > 29) {
+                        while ((incrementedDay > 29)) {
+                            incrementedDay -= 29;
+                            addMonths(1);
+                        }
+                    }
+                } else {
+                    if (incrementedDay > 28) {
+                        while ((incrementedDay > 28)) {
+                            incrementedDay -= 28;
+                            addMonths(1);
+                        }
+                    }
+                }
+            }
+
+            this.day = incrementedDay;
+        }
+        else {
+            System.out.println("Number of days can't be negative");
+            return null;
+        }
+        return this.toString();
+    }
+
+    public String addMonths(int numberOfMonths){
+        if(numberOfMonths > 0) {
+            int incrementedMonth = month + numberOfMonths;
+
+            if (incrementedMonth > 12){
+                while ((incrementedMonth > 12)) {
+                    incrementedMonth -= 12;
+                    year++;
+                    //addYears(1);
+                }
+            }
+            this.month = incrementedMonth;
+        } else {
+            System.out.println("Number of months can't be negative");
+            return null;
+        }
         return this.toString();
     }
 
