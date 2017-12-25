@@ -305,6 +305,14 @@ public class DateTime {
         return true;
     }
 
+    /**
+     * Method: addDays
+     *
+     * @param numberOfDays A number of days to add
+     * @return String
+     * Description: Add the desired number of days to the
+     * instance variable day.
+     */
     public String addDays(int numberOfDays){
         int incrementedDay = this.day + numberOfDays;
 
@@ -312,8 +320,7 @@ public class DateTime {
             if (incrementedDay > 30){
                 while(incrementedDay > 30){
                     incrementedDay -= 30;
-                    month++;
-                    //addMonths(1);
+                    addMonths(1);
                 }
             }
         }
@@ -322,8 +329,7 @@ public class DateTime {
             if (incrementedDay > 31){
                 while(incrementedDay > 31){
                     incrementedDay -= 31;
-                    month++;
-                    //addMonths(1);
+                    addMonths(1);
                 }
             }
         }
