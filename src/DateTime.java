@@ -229,6 +229,7 @@ public class DateTime {
         return true;
     }
 
+
     public String getSecond() {
         return second;
     }
@@ -277,22 +278,5 @@ public class DateTime {
         this.year = year;
     }
 
-    private boolean validDateTime(int year, int month, int day, int hour, int minute, int second) {
-        if (year > 9999) {
-            return false;
-        } else if (month > 12) {
-            return false;
-        } else if (day > 31) {
-            return false;
-        } else if (hour > 24) {
-            return false;
-
-        } else if (minute > 60) {
-            return false;
-        } else if (second > 60) {
-            return false;
-        }
-        return true;
-    }
 
 }

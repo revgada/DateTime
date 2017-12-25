@@ -25,11 +25,21 @@ class DateTimeTest {
     }
 
     @Test
-    void validDateTime31dayMonth(){
+    void validDate31dayMonthTest(){
         try {
             DateTime date = new DateTime(2012, 1, 32);
             assertEquals("Invalid Date", date.toString());
         } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    void validDateTime30dayMonthInvalidDateTest(){
+        try {
+            DateTime dateTime = new DateTime(2012, 4, 31, 13, 12, 32);
+            assertEquals("Invalid DateTIme", dateTime.toString());
+        }catch (Exception e){
             System.out.println(e.getMessage());
         }
     }
