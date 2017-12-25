@@ -364,6 +364,15 @@ public class DateTime {
         return this.toString();
     }
 
+
+    /**
+     * Method: addMonths
+     *
+     * @param numberOfMonths A number of months to add
+     * @return String
+     * Description: Add the desired number of months to the
+     * instance variable month.
+     */
     public String addMonths(int numberOfMonths){
         if(numberOfMonths > 0) {
             int incrementedMonth = month + numberOfMonths;
@@ -371,8 +380,7 @@ public class DateTime {
             if (incrementedMonth > 12){
                 while ((incrementedMonth > 12)) {
                     incrementedMonth -= 12;
-                    year++;
-                    //addYears(1);
+                    addYears(1);
                 }
             }
             this.month = incrementedMonth;
@@ -382,7 +390,6 @@ public class DateTime {
         }
         return this.toString();
     }
-
 
     /**
      * Getters and setters

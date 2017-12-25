@@ -170,6 +170,31 @@ class DateTimeTest {
         }
     }
 
+    /** ==============================================================================================
+     *  addYears Tests
+     *  ==============================================================================================
+     */
+
+    @Test
+    void addYearNoErrorTest(){
+        try {
+            DateTime dateTime = new DateTime(2012,1,28,12,45,13);
+            assertEquals("01/28/2022 12:45:13", dateTime.addYears(10));
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    void addYearOver9999Test(){
+        try {
+            DateTime dateTime = new DateTime(2012,1,28,12,45,13);
+            assertNull(dateTime.addYears(10000000));
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
     /** =============================================================================================
      *  Helper Tests
      *  =============================================================================================
