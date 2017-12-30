@@ -420,7 +420,23 @@ public class DateTime {
      * Description: Add the desired number of hours to the
      * instance variable hours.
      */
+    public String addHours(int numberOfHours){
+        if(numberOfHours > 0) {
+            int incrementedHour = hour + numberOfHours;
 
+            if (incrementedHour > 24){
+                while ((incrementedHour > 24)) {
+                    incrementedHour -= 24;
+                    addDays(1);
+                }
+            }
+            this.hour = incrementedHour;
+        } else {
+            System.out.println("Number of hours can't be negative");
+            return null;
+        }
+        return this.toString();
+    }
 
     /**
      * Getters and setters
