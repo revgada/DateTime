@@ -16,8 +16,8 @@ public class DateTime {
      * @param month
      * @param day
      * @throws Exception in case some or all of the parameters fall out
-     * of the required range.
-     * Description: Requires only the date portion, time is set to 00:00:00
+     *                   of the required range.
+     *                   Description: Requires only the date portion, time is set to 00:00:00
      */
     public DateTime(int year, int month, int day) throws Exception {
         if (validDate(year, month, day)) {
@@ -43,9 +43,9 @@ public class DateTime {
      * @param minute Transformed into string through formatMinute method
      * @param second Transformed into string through formatSecond method
      * @throws Exception in case some or all of the parameters fall out
-     * of the required range.
-     * Description: Requires both the date and the time portion. Time is
-     * converted into string through formatXXXX methods
+     *                   of the required range.
+     *                   Description: Requires both the date and the time portion. Time is
+     *                   converted into string through formatXXXX methods
      */
     public DateTime(int year, int month, int day, int hour, int minute, int second) throws Exception {
         if (validDateTime(year, month, day, hour, minute, second)) {
@@ -132,6 +132,70 @@ public class DateTime {
             return false;
     }
 
+    /**
+     * Method: validDate
+     *
+     * @param year
+     * @param month
+     * @param day
+     * @return boolean
+     * Description: Returns true if the parameters supplied
+     * are valid values for year, month and date attributes.
+     */
+    private static boolean validDate(int year, int month, int day) {
+        if (day < 1 || month < 1 || month > 12 || year < 0 || year > 9999)
+            return false;
+
+        if (isThirtyOneDayMonth(month) || isDecember(month)) {
+            if (day > 31) return false;
+        }
+
+        if (isThirtyDayMonth(month)) {
+            if (day > 30) return false;
+        }
+
+        if (isFebruary(month)) {
+            if (isLeapYear(year)) {
+                if (day > 29) return false;
+
+            } else {
+                if (day > 28) return false;
+            }
+
+        }
+
+        return true;
+    }
+
+    /**
+     * Method: validDateTime
+     *
+     * @param year
+     * @param month
+     * @param day
+     * @param hour
+     * @param minute
+     * @param second
+     * @return boolean
+     * Description: Returns true if the parameters supplied
+     * are valid values for year, month, date, hour, minute and second
+     * attributes.
+     */
+    private static boolean validDateTime(int year, int month, int day, int hour, int minute, int second) {
+        if (validDate(year, month, day)) {
+            if (hour < 0 || hour > 24)
+                return false;
+            else if (minute < 0 || minute > 60) {
+                return false;
+            } else if (second < 0 || second > 60) {
+                return false;
+            }
+        } else {
+            return false;
+        }
+
+        return true;
+    }
 
     /**
      * Method: toString
@@ -147,6 +211,18 @@ public class DateTime {
         String minuteString = formatMinute(minute);
         String secondString = formatSecond(second);
         return monthString + "/" + dayString + "/" + year + " " + hourString + ":" + minuteString + ":" + secondString;
+    }
+
+    /**
+     * Method: date
+     *
+     * @return String
+     * Description: Returns the Date component of a Datetime
+     */
+    public String date() {
+        String monthString = formatMonth(month);
+        String dayString = formatDay(day);
+        return monthString + "/" + dayString + "/" + year;
     }
 
     /**
@@ -241,73 +317,6 @@ public class DateTime {
     }
 
     /**
-     * Method: validDate
-     *
-     * @param year
-     * @param month
-     * @param day
-     * @return boolean
-     * Description: Returns true if the parameters supplied
-     * are valid values for year, month and date attributes.
-     */
-    private static boolean validDate(int year, int month, int day) {
-        if (day < 1 || month < 1 || month > 12 || year < 0 || year > 9999)
-            return false;
-
-        if (isThirtyOneDayMonth(month) || isDecember(month)) {
-            if (day > 31) return false;
-        }
-
-        if (isThirtyDayMonth(month)) {
-            if (day > 30) return false;
-        }
-
-        if (isFebruary(month)) {
-            if (isLeapYear(year)) {
-                if (day > 29) return false;
-
-            } else {
-                if (day > 28) return false;
-            }
-
-        }
-
-        return true;
-    }
-
-
-    /**
-     * Method: validDateTime
-     *
-     * @param year
-     * @param month
-     * @param day
-     * @param hour
-     * @param minute
-     * @param second
-     * @return boolean
-     * Description: Returns true if the parameters supplied
-     * are valid values for year, month, date, hour, minute and second
-     * attributes.
-     */
-    private static boolean validDateTime(int year, int month, int day, int hour, int minute, int second) {
-        if(validDate(year,month,day)){
-            if (hour < 0 || hour > 24)
-                return false;
-            else if (minute < 0 || minute > 60) {
-                return false;
-            }
-            else if (second < 0 || second > 60) {
-                return false;
-            }
-        }else {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
      * Method: addDays
      *
      * @param numberOfDays A number of days to add
@@ -315,8 +324,8 @@ public class DateTime {
      * Description: Add the desired number of days to the
      * instance variable day.
      */
-    public String addDays(int numberOfDays){
-        if(numberOfDays > 0) {
+    public String addDays(int numberOfDays) {
+        if (numberOfDays > 0) {
             int incrementedDay = this.day + numberOfDays;
 
             if (isThirtyDayMonth(month)) {
@@ -356,8 +365,7 @@ public class DateTime {
             }
 
             this.day = incrementedDay;
-        }
-        else {
+        } else {
             System.out.println("Number of days can't be negative");
             return null;
         }
@@ -373,11 +381,11 @@ public class DateTime {
      * Description: Add the desired number of months to the
      * instance variable month.
      */
-    public String addMonths(int numberOfMonths){
-        if(numberOfMonths > 0) {
+    public String addMonths(int numberOfMonths) {
+        if (numberOfMonths > 0) {
             int incrementedMonth = month + numberOfMonths;
 
-            if (incrementedMonth > 12){
+            if (incrementedMonth > 12) {
                 while ((incrementedMonth > 12)) {
                     incrementedMonth -= 12;
                     addYears(1);
@@ -392,7 +400,6 @@ public class DateTime {
     }
 
 
-
     /**
      * Method: addYears
      *
@@ -401,8 +408,8 @@ public class DateTime {
      * Description: Add the desired number of years to the
      * instance variable years.
      */
-    public String addYears(int numberOfYears){
-        if(numberOfYears > 0 && (year + numberOfYears) < 9999 ) {
+    public String addYears(int numberOfYears) {
+        if (numberOfYears > 0 && (year + numberOfYears) < 9999) {
             int incrementedYear = year + numberOfYears;
             this.year = incrementedYear;
         } else {
@@ -420,11 +427,11 @@ public class DateTime {
      * Description: Add the desired number of hours to the
      * instance variable hours.
      */
-    public String addHours(int numberOfHours){
-        if(numberOfHours > 0) {
+    public String addHours(int numberOfHours) {
+        if (numberOfHours > 0) {
             int incrementedHour = hour + numberOfHours;
 
-            if (incrementedHour > 24){
+            if (incrementedHour > 24) {
                 while ((incrementedHour > 24)) {
                     incrementedHour -= 24;
                     addDays(1);
@@ -446,11 +453,11 @@ public class DateTime {
      * Description: Add the desired number of minutes to the
      * instance variable minutes.
      */
-    public String addMinutes(int numberOfMinutes){
-        if(numberOfMinutes > 0) {
+    public String addMinutes(int numberOfMinutes) {
+        if (numberOfMinutes > 0) {
             int incrementedMinute = minute + numberOfMinutes;
 
-            if (incrementedMinute > 60){
+            if (incrementedMinute > 60) {
                 while ((incrementedMinute > 60)) {
                     incrementedMinute -= 60;
                     addHours(1);
@@ -472,11 +479,11 @@ public class DateTime {
      * Description: Add the desired number of seconds to the
      * instance variable minutes.
      */
-    public String addSeconds(int numberOfSeconds){
-        if(numberOfSeconds > 0) {
+    public String addSeconds(int numberOfSeconds) {
+        if (numberOfSeconds > 0) {
             int incrementedSecond = second + numberOfSeconds;
 
-            if (incrementedSecond > 60){
+            if (incrementedSecond > 60) {
                 while ((incrementedSecond > 60)) {
                     incrementedSecond -= 60;
                     addMinutes(1);
@@ -492,7 +499,6 @@ public class DateTime {
 
     /**
      * Getters and setters
-     *
      */
 
     public int getSecond() {
