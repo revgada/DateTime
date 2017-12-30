@@ -105,6 +105,40 @@ class DateTimeTest {
         }
     }
 
+    /** ==============================================================================================
+     *  dayOfTheWeek tests
+     *  ==============================================================================================
+     */
+
+    @Test
+    void dayOfTheWeekSundayTest(){
+        try {
+            DateTime dateTime = new DateTime(2017,12,31,12,45,13);
+            assertEquals("Sunday", dateTime.dayOfTheWeek());
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    void dayOfTheWeekTuesdayTest(){
+        try {
+            DateTime dateTime = new DateTime(2017,12,5,12,45,13);
+            assertEquals("Tuesday", dateTime.dayOfTheWeek());
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    void dayOfTheWeekThursdayTest(){
+        try {
+            DateTime dateTime = new DateTime(2017,12,21,12,45,13);
+            assertEquals("Thursday", dateTime.dayOfTheWeek());
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
 
     /** ================================================================================================
      *  addDays tests
