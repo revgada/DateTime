@@ -438,7 +438,31 @@ public class DateTime {
         return this.toString();
     }
 
+    /**
+     * Method: addMinutes
+     *
+     * @param numberOfMinutes A number of months to add
+     * @return String
+     * Description: Add the desired number of minutes to the
+     * instance variable minutes.
+     */
+    public String addMinutes(int numberOfMinutes){
+        if(numberOfMinutes > 0) {
+            int incrementedMinute = minute + numberOfMinutes;
 
+            if (incrementedMinute > 60){
+                while ((incrementedMinute > 60)) {
+                    incrementedMinute -= 60;
+                    addHours(1);
+                }
+            }
+            this.minute = incrementedMinute;
+        } else {
+            System.out.println("Number of minutes can't be negative");
+            return null;
+        }
+        return this.toString();
+    }
 
     /**
      * Getters and setters
