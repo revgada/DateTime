@@ -195,6 +195,41 @@ class DateTimeTest {
         }
     }
 
+    /** ==============================================================================================
+     *  addMonths Tests
+     *  ==============================================================================================
+     */
+
+    @Test
+    void addHoursNegativeTest(){
+        try {
+            DateTime dateTime = new DateTime(2011,12,28,12,45,13);
+            assertNull(dateTime.addHours(-6));
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    void addHoursLessThan24Test(){
+        try {
+            DateTime dateTime = new DateTime(2012,1,28,12,45,13);
+            assertEquals("01/28/2012 22:45:13",dateTime.addHours(10));
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    void addHoursMoreThan24Test(){
+        try {
+            DateTime dateTime = new DateTime(2012,1,31,12,45,13);
+            assertEquals("02/01/2012 22:45:13", dateTime.addHours(34));
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
     /** =============================================================================================
      *  Helper Tests
      *  =============================================================================================

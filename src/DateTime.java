@@ -391,6 +391,8 @@ public class DateTime {
         return this.toString();
     }
 
+
+
     /**
      * Method: addYears
      *
@@ -409,6 +411,15 @@ public class DateTime {
         }
         return this.toString();
     }
+
+    /**
+     * Method: addHours
+     *
+     * @param numberOfHours A number of months to add
+     * @return String
+     * Description: Add the desired number of hours to the
+     * instance variable hours.
+     */
 
 
     /**
