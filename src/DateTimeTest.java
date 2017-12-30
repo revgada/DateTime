@@ -294,7 +294,7 @@ class DateTimeTest {
     void addSecondsMoreThan60Test(){
         try {
             DateTime dateTime = new DateTime(2012,1,28,12,45,13);
-            assertEquals("01/28/2012 13:46:13", dateTime.addSeconds(70));
+            assertEquals("01/28/2012 12:46:23", dateTime.addSeconds(70));
         } catch (Exception e){
             System.out.println(e.getMessage());
         }

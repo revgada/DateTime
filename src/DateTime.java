@@ -415,7 +415,7 @@ public class DateTime {
     /**
      * Method: addHours
      *
-     * @param numberOfHours A number of months to add
+     * @param numberOfHours A number of hours to add
      * @return String
      * Description: Add the desired number of hours to the
      * instance variable hours.
@@ -441,7 +441,7 @@ public class DateTime {
     /**
      * Method: addMinutes
      *
-     * @param numberOfMinutes A number of months to add
+     * @param numberOfMinutes A number of minutes to add
      * @return String
      * Description: Add the desired number of minutes to the
      * instance variable minutes.
@@ -459,6 +459,32 @@ public class DateTime {
             this.minute = incrementedMinute;
         } else {
             System.out.println("Number of minutes can't be negative");
+            return null;
+        }
+        return this.toString();
+    }
+
+    /**
+     * Method: addSeconds
+     *
+     * @param numberOfSeconds A number of seconds to add
+     * @return String
+     * Description: Add the desired number of seconds to the
+     * instance variable minutes.
+     */
+    public String addSeconds(int numberOfSeconds){
+        if(numberOfSeconds > 0) {
+            int incrementedSecond = second + numberOfSeconds;
+
+            if (incrementedSecond > 60){
+                while ((incrementedSecond > 60)) {
+                    incrementedSecond -= 60;
+                    addMinutes(1);
+                }
+            }
+            this.second = incrementedSecond;
+        } else {
+            System.out.println("Number of seconds can't be negative");
             return null;
         }
         return this.toString();
