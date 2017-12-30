@@ -265,6 +265,41 @@ class DateTimeTest {
         }
     }
 
+    /** ==============================================================================================
+     *  addSeconds Tests
+     *  ==============================================================================================
+     */
+
+    @Test
+    void addSecondsNegativeTest(){
+        try {
+            DateTime dateTime = new DateTime(2011,12,28,12,45,13);
+            assertNull(dateTime.addSeconds(-6));
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    void addSecondsLessThan60Test(){
+        try {
+            DateTime dateTime = new DateTime(2012,1,28,12,45,13);
+            assertEquals("01/28/2012 12:45:23",dateTime.addSeconds(10));
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    void addSecondsMoreThan60Test(){
+        try {
+            DateTime dateTime = new DateTime(2012,1,28,12,45,13);
+            assertEquals("01/28/2012 13:46:13", dateTime.addSeconds(70));
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
     /** =============================================================================================
      *  Helper Tests
      *  =============================================================================================
