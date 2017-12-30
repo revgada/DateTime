@@ -226,6 +226,58 @@ public class DateTime {
     }
 
     /**
+     * Method: dayOfTheWeek
+     *
+     * @return String
+     * Description: Returns the day of the week
+     */
+    public String dayOfTheWeek() {
+
+        int adjustedMonth;
+        if (month == 1 || month == 2)
+            adjustedMonth = month + 12;
+        else
+            adjustedMonth = month;
+
+        int adjustedYear;
+        if (adjustedMonth == 13 || adjustedMonth == 14)
+            adjustedYear =  (year % 100) - 1;
+        else
+            adjustedYear = year % 100;
+
+        int weekDay = (day + (int)((26 * (adjustedMonth + 1)) / 10.0) + adjustedYear + (int)(adjustedYear / 4.0) + 6 * (int)(adjustedYear / 100.0) + (int)(adjustedYear / 400.0)) % 7;
+        String weekDayString;
+
+        switch (weekDay) {
+            case 0:
+                weekDayString = "Saturday";
+                break;
+            case 1:
+                weekDayString = "Sunday";
+                break;
+            case 2:
+                weekDayString = "Monday";
+                break;
+            case 3:
+                weekDayString = "Tuesday";
+                break;
+            case 4:
+                weekDayString = "Wednesday";
+                break;
+            case 5:
+                weekDayString = "Thursday";
+                break;
+            case 6:
+                weekDayString = "Friday";
+                break;
+            default:
+                weekDayString = String.valueOf(weekDay);
+
+        }
+        return weekDayString;
+    }
+
+    /**
      * Method: formatMonth
      *
      * @param month An int representation of the month attribute
